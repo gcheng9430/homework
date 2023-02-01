@@ -52,6 +52,7 @@ class GradientDescentLinearRegression(LinearRegression):
             X (np.ndarray): The input data.
         Returns:
             np.ndarray: The predicted output.
+            
     """
     def predict(self, X: np.ndarray) -> np.ndarray: 
         
