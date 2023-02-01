@@ -31,7 +31,7 @@ class GradientDescentLinearRegression(LinearRegression):
     ) -> None:
 
         self.m, self.n = X.shape
-        self.w = np.zeros(self.n, 1)
+        self.w = np.zeros(self.n)
         self.b = 0
         for i in range(epochs):
 
