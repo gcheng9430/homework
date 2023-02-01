@@ -2,6 +2,10 @@ import numpy as np
 
 
 class LinearRegression:
+    """
+    a linear regression model that uses closed form formula to make predictions
+    """
+
     # w: np.ndarray
     # b: float
 
@@ -12,11 +16,12 @@ class LinearRegression:
 
     def fit(self, X, y):
         """
-        Fit data with given input and label
+        fit model with given data
         Arguments:
-            X (np.ndarray): The input data.
+            X(np.ndarray):Input data
+            y(np.ndarray): Input label
         Returns:
-            (np.ndarray): The prediction
+            None
         """
         self.w = np.linalg.inv(X.T @ X) @ X.T @ y
         self.b = y.mean() - self.w @ X.mean(axis=0)
@@ -42,12 +47,12 @@ class GradientDescentLinearRegression(LinearRegression):
 
     def fit(self, X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000):
         """
-        Fit the model for the given input.
+        fit the model with given data
         Arguments:
-            X (np.ndarray): The input data.
-            y (np.ndarray): The input label
-            lr (float): The learning rate
-            epochs (int): number of iterations
+        X(np.ndarray): input data
+        y(np.ndarray): input label
+        lr(float): the learning rate
+        epochs(int): the number of iterations
         Returns:
             None
         """
