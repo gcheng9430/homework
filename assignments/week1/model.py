@@ -45,15 +45,13 @@ class GradientDescentLinearRegression(LinearRegression):
             self.w -= lr * d_w
             self.b -= lr * d_b
 
+
+    def predict(self, X: np.ndarray) -> np.ndarray:
     """
         Predict the output for the given input.
         Arguments:
             X (np.ndarray): The input data.
         Returns:
-            np.ndarray: The predicted output.
-            
+            np.ndarray: The predicted output.     
     """
-
-    def predict(self, X: np.ndarray) -> np.ndarray:
-
         return X @ self.w + self.b
