@@ -14,7 +14,7 @@ class LinearRegression:
         self.w = None
         self.b = None
 
-    def fit(self, X, y):
+    def fit(self, X, y) -> None:
         """
         fit model with given data
         Arguments:
@@ -27,14 +27,14 @@ class LinearRegression:
         self.b = y.mean() - self.w @ X.mean(axis=0)
         # raise NotImplementedError()
 
-    def predict(self, X):
+    def predict(self, X) -> np.ndarray:
         """
         predict the model output for the given input.
         Arguments:
             X (np.ndarray): The input data.
             y (np.ndarray): The input label
         Returns:
-            None
+            np.ndarray: the prediction
         """
         return X.dot(self.w) + self.b
         # raise NotImplementedError()
