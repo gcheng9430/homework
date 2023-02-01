@@ -14,7 +14,7 @@ class LinearRegression:
         self.w = None
         self.b = None
 
-    def fit(self, X, y) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray) -> None:
         """
         fit model with given data
         Arguments:
@@ -27,7 +27,7 @@ class LinearRegression:
         self.b = y.mean() - self.w @ X.mean(axis=0)
         # raise NotImplementedError()
 
-    def predict(self, X) -> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         predict the model output for the given input.
         Arguments:
@@ -45,7 +45,9 @@ class GradientDescentLinearRegression(LinearRegression):
     A linear regression model that uses gradient descent to fit the model.
     """
 
-    def fit(self, X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000):
+    def fit(
+        self, X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000
+    ) -> None:
         """
         fit the model with given data
         Arguments:
@@ -70,7 +72,7 @@ class GradientDescentLinearRegression(LinearRegression):
             self.w -= lr * d_w
             self.b -= lr * d_b
 
-    def predict(self, X: np.ndarray):
+    def predict(self, X: np.ndarray) -> np.ndarray:
         """
         Predict the output for the given input.
         Arguments:
