@@ -2,7 +2,6 @@ import numpy as np
 
 
 class LinearRegression:
-
     # w: np.ndarray
     # b: float
 
@@ -56,7 +55,6 @@ class GradientDescentLinearRegression(LinearRegression):
         self.w = np.zeros(self.n)
         self.b = 0
         for i in range(epochs):
-
             y_pred = self.predict(X)
             # calculate gradient
 
