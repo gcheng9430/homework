@@ -75,5 +75,4 @@ class GradientDescentLinearRegression(LinearRegression):
         Returns:
             np.ndarray: The predicted output.
         """
-
         return X @ self.w + self.b
