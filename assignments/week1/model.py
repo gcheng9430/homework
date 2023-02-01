@@ -13,7 +13,7 @@ class LinearRegression:
 
     def fit(self, X, y):
         self.w = np.linalg.inv(X.T @ X) @ X.T @ y
-        self.b = y.mean() - self.w @ X.mean(axis = 0)
+        self.b = y.mean() - self.w @ X.mean(axis=0)
         # raise NotImplementedError()
 
     def predict(self, X):
@@ -28,23 +28,22 @@ class GradientDescentLinearRegression(LinearRegression):
 
     def fit(
         self, X: np.ndarray, y: np.ndarray, lr: float = 0.01, epochs: int = 1000
-    ) -> None :
+    ) -> None:
 
         self.m, self.n = X.shape
-        self.w = np.zeros(self.n,1)
+        self.w = np.zeros(self.n, 1)
         self.b = 0
         for i in range(epochs):
 
             y_pred = self.predict(X)
-            #calculate gradient
-            
-            d_w = -(2*(X.T)@(y-y_pred))/self.m
-            d_b = -2*np.sum(y-y_pred)/self.m
+            # calculate gradient
 
-            #update params
+            d_w = -(2 * (X.T) @ (y - y_pred)) / self.m
+            d_b = -2 * np.sum(y - y_pred) / self.m
+
+            # update params
             self.w -= lr * d_w
-            self.b -= lr * d_b 
-
+            self.b -= lr * d_b
 
     """
         Predict the output for the given input.
@@ -54,10 +53,7 @@ class GradientDescentLinearRegression(LinearRegression):
             np.ndarray: The predicted output.
             
     """
-    def predict(self, X: np.ndarray) -> np.ndarray: 
-        
+
+    def predict(self, X: np.ndarray) -> np.ndarray:
+
         return X @ self.w + self.b
-        
-
-
-       
