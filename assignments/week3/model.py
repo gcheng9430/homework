@@ -4,6 +4,10 @@ import torch
 
 
 class MLP(torch.nn.Module):
+    """
+    MLP class with initialization and forward method. inherits nn.Module
+    """
+
     def __init__(
         self,
         input_size: int,
@@ -22,6 +26,7 @@ class MLP(torch.nn.Module):
             num_classes: The number of classes C.
             activation: The activation function to use in the hidden layer.
             initializer: The initializer to use for the weights.
+        Returns: None
         """
         super(MLP, self).__init__()
 
@@ -39,7 +44,7 @@ class MLP(torch.nn.Module):
         self.activation = activation
         self.initializer = initializer
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the network.
 
