@@ -61,7 +61,7 @@ class MLP(torch.nn.Module):
         self.activation = activation
         self.initializer = initializer
         self.hidden_count = hidden_count
-        self.dropout = torch.nn.Dropout(0.5)
+        self.dropout = torch.nn.Dropout(0.2)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
