@@ -1,3 +1,4 @@
+import torch
 from typing import Callable
 import torch
 
@@ -34,7 +35,7 @@ class MLP(torch.nn.Module):
         #output layer and initilize weight 
         self.out = torch.nn.Linear(hidden_size,num_classes)
         initializer(self.out.weight)
-        
+
         self.activation = activation
         self.initializer = initializer
 
