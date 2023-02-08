@@ -31,13 +31,30 @@ class MLP(torch.nn.Module):
 
         # initialize layers of MLP
         self.layers = torch.nn.ModuleList()
-        for i in range(hidden_count):
+        for i in range(hidden_count // 2 + 1):
             self.layers += [torch.nn.Linear(input_size, hidden_size)]
+            # print("now in ",i," ",input_size," ",hidden_size)
             input_size = hidden_size
+            hidden_size *= 2
             # initialize weight
             initializer(self.layers[-1].weight)
+            # add batch norm
+            self.layers += [torch.nn.BatchNorm1d(input_size)]
+        dec = False
+        for i in range(hidden_count // 2 + 1, hidden_count):
+            dec = True
+            hidden_size = hidden_size // 4
+            self.layers += [torch.nn.Linear(input_size, hidden_size)]
+            # print("now in ",i," ",input_size," ",hidden_size)
+            input_size = hidden_size
+            hidden_size = hidden_size // 2
+            # initialize weight
+            initializer(self.layers[-1].weight)
+            # add batch norm
+            self.layers += [torch.nn.BatchNorm1d(input_size)]
+
         # output layer and initilize weight
-        self.out = torch.nn.Linear(hidden_size, num_classes)
+        self.out = torch.nn.Linear(input_size, num_classes)
         initializer(self.out.weight)
 
         self.activation = activation
