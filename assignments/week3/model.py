@@ -59,6 +59,7 @@ class MLP(torch.nn.Module):
         self.activation = activation
         self.initializer = initializer
         self.hidden_count = hidden_count
+        self.dropout = torch.nn.Dropout(0.5)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
@@ -70,11 +71,14 @@ class MLP(torch.nn.Module):
         Returns:
             The output of the network.
         """
+        # go through the layers
         for i in range(self.hidden_count):
             x = self.layers[i](x)
             x = self.batchLayer[i](x)
             x = self.activation(x)
 
+        # output layer
+        x = self.dropout(x)
         x = self.out(x)
 
         return x
