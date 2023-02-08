@@ -20,6 +20,6 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         64,
         output_dim,
         5,
-        torch.nn.functional.gelu,
+        torch.nn.functional.SiLU(),
         torch.nn.init.xavier_uniform_,
     )
