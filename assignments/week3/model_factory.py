@@ -21,5 +21,5 @@ def create_model(input_dim: int, output_dim: int) -> MLP:
         output_dim,
         3,
         torch.nn.functional.gelu,
-        torch.nn.init.kaiming_normal_,
+        torch.nn.init.xavier_uniform_,
     )
