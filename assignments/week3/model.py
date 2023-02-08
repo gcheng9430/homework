@@ -18,6 +18,7 @@ class MLP(torch.nn.Module):
     ) -> None:
         """
         Initialize the MLP.
+
         Arguments:
             input_size: The dimension D of the input data.
             hidden_size: The number of neurons H in the hidden layer.
@@ -30,6 +31,8 @@ class MLP(torch.nn.Module):
 
         # initialize layers of MLP
         self.layers = torch.nn.ModuleList()
+        self.batchLayer = torch.nn.ModuleList()
+        # increasing hidden units
         for i in range(hidden_count // 2 + 1):
             self.layers += [torch.nn.Linear(input_size, hidden_size)]
             # print("now in ",i," ",input_size," ",hidden_size)
@@ -38,7 +41,8 @@ class MLP(torch.nn.Module):
             # initialize weight
             initializer(self.layers[-1].weight)
             # add batch norm
-            self.layers += [torch.nn.BatchNorm1d(input_size)]
+            self.batchLayer += [torch.nn.BatchNorm1d(input_size)]
+        # then decreasing hidden units
         for i in range(hidden_count // 2 + 1, hidden_count):
             hidden_size = hidden_size // 4
             self.layers += [torch.nn.Linear(input_size, hidden_size)]
@@ -48,7 +52,7 @@ class MLP(torch.nn.Module):
             # initialize weight
             initializer(self.layers[-1].weight)
             # add batch norm
-            self.layers += [torch.nn.BatchNorm1d(input_size)]
+            self.batchLayer += [torch.nn.BatchNorm1d(input_size)]
 
         # output layer and initilize weight
         self.out = torch.nn.Linear(input_size, num_classes)
@@ -56,19 +60,27 @@ class MLP(torch.nn.Module):
 
         self.activation = activation
         self.initializer = initializer
+        self.hidden_count = hidden_count
+        self.dropout = torch.nn.Dropout(0.5)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Forward pass of the network.
+
         Arguments:
             x: The input data.
+
         Returns:
             The output of the network.
         """
-        for layer in self.layers:
-            x = layer(x)
+        # go through the layers
+        for i in range(self.hidden_count):
+            x = self.layers[i](x)
+            x = self.batchLayer[i](x)
             x = self.activation(x)
 
+        # output layer
+        x = self.dropout(x)
         x = self.out(x)
 
         return x
