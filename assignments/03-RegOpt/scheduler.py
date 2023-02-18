@@ -4,7 +4,7 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 
 class CustomLRScheduler(_LRScheduler):
-    def __init__(self, optimizer, last_epoch=-1):
+    def __init__(self, optimizer, factor, last_epoch=-1):
         """
         Create a new scheduler.
 
@@ -13,6 +13,7 @@ class CustomLRScheduler(_LRScheduler):
 
         """
         # ... Your Code Here ...
+        self.factor = factor
         super(CustomLRScheduler, self).__init__(optimizer, last_epoch)
 
     def get_lr(self) -> List[float]:
@@ -21,4 +22,6 @@ class CustomLRScheduler(_LRScheduler):
 
         # ... Your Code Here ...
         # Here's our dumb baseline implementation:
-        return [i for i in self.base_lrs]
+        if self.last_epoch == 0:
+            return [i for i in self.base_lrs]
+        return [group["lr"] * self.factor for group in self.optimizer.param_groups]
