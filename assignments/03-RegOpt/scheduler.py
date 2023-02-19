@@ -49,7 +49,8 @@ class CustomLRScheduler(_LRScheduler):
         # return [i * 1 / (1 + decay * self.last_epoch) for i in self.base_lrs]
 
         # if self.last_epoch >= 6000:
-        #     return [i * np.exp(-self.factor * self.last_epoch ** 1) for i in self.base_lrs]
+        #     return [i * np.exp(-self.factor * self.last_epoch ** 0.99) for i in self.base_lrs]
+
         # if self.last_epoch >= 3000:
         #     return [i * np.exp(-self.factor * self.last_epoch ** 0.8) for i in self.base_lrs]
 
