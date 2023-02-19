@@ -45,12 +45,18 @@ class CustomLRScheduler(_LRScheduler):
         # if self.last_epoch >= 2346:
         #     self.factor *= 2**(1/782)
 
-        # this is time based decay
-        decay = self.initial_learning_rate / self.num_epochs
-        return [i * 1 / (1 + decay * self.last_epoch) for i in self.base_lrs]
+        # # this is time based decay
+        # decay = self.initial_learning_rate / self.num_epochs
+        # return [i * 1 / (1 + decay * self.last_epoch) for i in self.base_lrs]
+
+        if self.last_epoch >= 3000:
+            return [
+                i * np.exp(-self.factor * (self.last_epoch) ** 1.01)
+                for i in self.base_lrs
+            ]
 
         # This is expo decay - current best
-        # return [i * np.exp(-self.factor * self.last_epoch) for i in self.base_lrs]
+        return [i * np.exp(-self.factor * self.last_epoch) for i in self.base_lrs]
 
         # return [i*j for (i, j) in zip(self.base_lrs , decay)]
         # return [group["lr"] * self.factor for group in self.optimizer.param_groups]
