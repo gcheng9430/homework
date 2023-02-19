@@ -4,11 +4,13 @@ import torch.optim
 import torch.nn as nn
 from torchvision.transforms import Compose, Normalize, ToTensor
 
+# import torchvision.transforms as transforms
+
 
 class CONFIG:
     batch_size = 64
     num_epochs = 10
-    initial_learning_rate = 0.01
+    initial_learning_rate = 0.005
     initial_weight_decay = 0.001
 
     lrs_kwargs = {
