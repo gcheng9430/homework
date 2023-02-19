@@ -4,7 +4,7 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 
 class CustomLRScheduler(_LRScheduler):
-    def __init__(self, optimizer, factor, last_epoch=-1):
+    def __init__(self, optimizer, factor=0.9, last_epoch=-1):
         """
         Create a new scheduler.
 
