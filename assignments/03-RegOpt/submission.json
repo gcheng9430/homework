@@ -1,10 +1,16 @@
 {
     "assignment_name": "RegOpt",
     "contributors": [
-        {"name": "Guo Cheng", "pennkey": "guocheng"},
-        {"name": "Haozhen Ni", "pennkey": "nihzzzzz"},
+        {
+            "name": "Guo Cheng",
+            "pennkey": "guocheng"
+        },
+        {
+            "name": "Haozhen Ni",
+            "pennkey": "nihzzzzz"
+        }
     ],
     "sources": [
         "https://pytorch.org/docs/stable/_modules/torch/optim/lr_scheduler.html#LinearLR"
-    ],
+    ]
 }
