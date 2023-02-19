@@ -48,8 +48,8 @@ class CustomLRScheduler(_LRScheduler):
         # decay = self.initial_learning_rate / self.num_epochs
         # return [i * 1 / (1 + decay * self.last_epoch) for i in self.base_lrs]
 
-        # if self.last_epoch >= 6000:
-        #     return [i * np.exp(-self.factor * self.last_epoch ** 0.99) for i in self.base_lrs]
+        if self.last_epoch >= 4000:
+            return [0.00001 + (i - 0.00001)* 1.1 * (1 + np.cos(np.pi * self.last_epoch / self.total_iters)) / 2 for i in self.base_lrs]
 
         # if self.last_epoch >= 3000:
         #     return [i * np.exp(-self.factor * self.last_epoch ** 0.8) for i in self.base_lrs]
