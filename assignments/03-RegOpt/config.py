@@ -7,14 +7,14 @@ from torchvision.transforms import Compose, Normalize, ToTensor
 
 class CONFIG:
     batch_size = 64
-    num_epochs = 2
-    initial_learning_rate = 0.001
-    initial_weight_decay = 0
+    num_epochs = 30
+    initial_learning_rate = 0.01
+    initial_weight_decay = 0.001
 
     lrs_kwargs = {
         # You can pass arguments to the learning rate scheduler
         # constructor here.
-        # 'factor': 0.9
+        "factor": 0.001,
     }
 
     optimizer_factory: Callable[
@@ -26,7 +26,5 @@ class CONFIG:
     )
 
     transforms = Compose(
-        [
-            ToTensor(),Normalize((0),(1))
-        ]
+        [ToTensor(), Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])]
     )

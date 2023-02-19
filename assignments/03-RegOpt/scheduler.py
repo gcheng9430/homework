@@ -1,6 +1,7 @@
 from typing import List
 
 from torch.optim.lr_scheduler import _LRScheduler
+import numpy as np
 
 
 class CustomLRScheduler(_LRScheduler):
@@ -22,6 +23,11 @@ class CustomLRScheduler(_LRScheduler):
 
         # ... Your Code Here ...
         # Here's our dumb baseline implementation:
+        # print(type(self.last_epoch))
+
         if self.last_epoch == 0:
             return [i for i in self.base_lrs]
-        return [group["lr"] * self.factor for group in self.optimizer.param_groups]
+        return [i * np.exp(-self.factor * self.last_epoch) for i in self.base_lrs]
+
+        # return [i*j for (i, j) in zip(self.base_lrs , decay)]
+        # return [group["lr"] * self.factor for group in self.optimizer.param_groups]
