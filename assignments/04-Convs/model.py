@@ -27,11 +27,11 @@ class Model(torch.nn.Module):
         # self.initializer = torch.nn.init.xavier_uniform_
 
         self.conv1 = torch.nn.Conv2d(
-            num_channels, 24, kernel_size=3, stride=2, padding=1
+            num_channels, 16, kernel_size=3, stride=2, padding=1
         )
         # self.initializer(self.conv1.weight)
-        self.batch1 = torch.nn.BatchNorm2d(24)
-        self.conv2 = torch.nn.Conv2d(24, 16, kernel_size=3, stride=2, padding=1)
+        self.batch1 = torch.nn.BatchNorm2d(16)
+        self.conv2 = torch.nn.Conv2d(16, 16, kernel_size=3, stride=2, padding=1)
         # self.initializer(self.conv2.weight)
         # self.batch2 = torch.nn.BatchNorm2d(16)
 
@@ -56,7 +56,6 @@ class Model(torch.nn.Module):
 
         x = x.view(-1, 16 * 8 * 8)
         x = self.fc1(x)
-
         x = self.activation(x)
         # x = self.dropout(x)
         x = self.fc2(x)
