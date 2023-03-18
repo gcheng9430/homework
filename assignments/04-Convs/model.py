@@ -33,7 +33,7 @@ class Model(torch.nn.Module):
         self.batch1 = torch.nn.BatchNorm2d(24)
         self.conv2 = torch.nn.Conv2d(24, 16, kernel_size=3, stride=2, padding=1)
         # self.initializer(self.conv2.weight)
-        self.batch2 = torch.nn.BatchNorm2d(16)
+        # self.batch2 = torch.nn.BatchNorm2d(16)
 
         self.fc1 = torch.nn.Linear(16 * 8 * 8, 128)
         self.initializer(self.fc1.weight)
