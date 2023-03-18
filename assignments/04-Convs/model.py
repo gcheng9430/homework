@@ -27,11 +27,11 @@ class Model(torch.nn.Module):
         # self.initializer = torch.nn.init.xavier_uniform_
 
         self.conv1 = torch.nn.Conv2d(
-            num_channels, 16, kernel_size=3, stride=2, padding=1
+            num_channels, 32, kernel_size=3, stride=2, padding=1
         )
         # self.initializer(self.conv1.weight)
-        self.batch1 = torch.nn.BatchNorm2d(16)
-        self.conv2 = torch.nn.Conv2d(16, 16, kernel_size=3, stride=2, padding=1)
+        self.batch1 = torch.nn.BatchNorm2d(32)
+        self.conv2 = torch.nn.Conv2d(32, 16, kernel_size=3, stride=2, padding=1)
         # self.initializer(self.conv2.weight)
         # self.batch2 = torch.nn.BatchNorm2d(16)
 
@@ -40,7 +40,7 @@ class Model(torch.nn.Module):
         # self.dropout = torch.nn.Dropout(0.5)
         self.fc2 = torch.nn.Linear(128, num_classes)
         # self.initializer(self.fc2.weight)
-        self.activation = torch.nn.SiLU()
+        self.activation = torch.nn.ReLU()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
