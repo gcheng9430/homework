@@ -24,7 +24,7 @@ class Model(torch.nn.Module):
         #     torch.nn.Linear(256,num_classes)
         # )
 
-        self.initializer = torch.nn.init.xavier_uniform_
+        # self.initializer = torch.nn.init.xavier_uniform_
 
         self.conv1 = torch.nn.Conv2d(
             num_channels, 24, kernel_size=3, stride=2, padding=1
@@ -36,10 +36,10 @@ class Model(torch.nn.Module):
         # self.batch2 = torch.nn.BatchNorm2d(16)
 
         self.fc1 = torch.nn.Linear(16 * 8 * 8, 128)
-        self.initializer(self.fc1.weight)
-        self.dropout = torch.nn.Dropout(0.5)
+        # self.initializer(self.fc1.weight)
+        # self.dropout = torch.nn.Dropout(0.5)
         self.fc2 = torch.nn.Linear(128, num_classes)
-        self.initializer(self.fc2.weight)
+        # self.initializer(self.fc2.weight)
         self.activation = torch.nn.SiLU()
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -58,7 +58,7 @@ class Model(torch.nn.Module):
         x = self.fc1(x)
 
         x = self.activation(x)
-        x = self.dropout(x)
+        # x = self.dropout(x)
         x = self.fc2(x)
 
         return x
