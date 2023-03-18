@@ -35,10 +35,10 @@ class Model(torch.nn.Module):
         # self.initializer(self.conv2.weight)
         # self.batch2 = torch.nn.BatchNorm2d(16)
 
-        self.fc1 = torch.nn.Linear(16 * 8 * 8, num_classes)
+        self.fc1 = torch.nn.Linear(16 * 8 * 8, 32)
         # self.initializer(self.fc1.weight)
         # self.dropout = torch.nn.Dropout(0.5)
-        self.fc2 = torch.nn.Linear(64, num_classes)
+        self.fc2 = torch.nn.Linear(32, num_classes)
         # self.initializer(self.fc2.weight)
         self.activation = torch.nn.SiLU()
         self.relu = torch.nn.ReLU()
@@ -57,8 +57,8 @@ class Model(torch.nn.Module):
 
         x = x.view(-1, 16 * 8 * 8)
         x = self.fc1(x)
-        # x = self.activation(x)
-        # # x = self.dropout(x)
-        # x = self.fc2(x)
+        x = self.activation(x)
+        # x = self.dropout(x)
+        x = self.fc2(x)
 
         return x
