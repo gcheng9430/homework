@@ -61,7 +61,7 @@ class Model(torch.nn.Module):
 
         x = x.view(-1, 16 * 8 * 8)
         x = self.fc1(x)
-        x = self.relu(x)
+        x = self.activation(x)
         # x = self.dropout(x)
         x = self.fc2(x)
 
